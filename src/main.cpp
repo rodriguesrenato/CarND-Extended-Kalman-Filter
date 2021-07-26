@@ -31,7 +31,7 @@ string hasData(string s) {
 
 int main() {
   uWS::Hub h;
-
+  
   // Create a Kalman Filter instance
   FusionEKF fusionEKF;
 
@@ -139,7 +139,9 @@ int main() {
           auto msg = "42[\"estimate_marker\"," + msgJson.dump() + "]";
           // std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
-
+          
+          // Print the output
+          tools.Print(RMSE,fusionEKF.ekf_.x_,fusionEKF.ekf_.P_);
         }  // end "telemetry" if
 
       } else {
